@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#09090b" />
-    <title>Free K12 Education</title>
+    <title>Free K-12 Education</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap');
@@ -759,6 +759,8 @@
     <div class="lyrics-overlay" id="lyricsOverlay"><div class="lyrics-box"><div class="lyrics-head"><div><strong id="lyricsTitle">Lyrics</strong><div id="lyricsArtist" class="dim"></div></div><button id="lyricsClose" aria-label="Close lyrics"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="lyrics-status" id="lyricsStatus"></div><div class="lyric-list" id="lyricsText">Choose a track to look up its lyrics.</div></div></div>
 
     <script>
+      // Keep this page from closing its own tab if a page script requests it.
+      window.close = function () {};
 
    
       const YOUTUBE_API_KEYS = [
