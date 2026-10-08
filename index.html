@@ -1,0 +1,175 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Practice</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f4f4f4;
+        font-family: Arial, sans-serif;
+    }
+
+    .box {
+        width: 90%;
+        max-width: 500px;
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    #question {
+        font-size: 32px;
+        font-weight: bold;
+        margin: 30px 0;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        font-size: 20px;
+        text-align: center;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #555;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 12px;
+        border: none;
+        border-radius: 10px;
+        background: #111;
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    #message {
+        min-height: 25px;
+        margin-top: 18px;
+        font-weight: bold;
+    }
+
+    .score {
+        margin-top: 20px;
+        color: #666;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Math Practice</h1>
+
+    <div id="question"></div>
+
+    <input
+        id="answer"
+        type="number"
+        placeholder="Enter your answer"
+        onkeydown="if(event.key === 'Enter') checkAnswer()"
+    >
+
+    <button onclick="checkAnswer()">Check Answer</button>
+
+    <div id="message"></div>
+
+    <div class="score">
+        Score: <span id="score">0</span>
+    </div>
+</div>
+
+<script>
+let correctAnswer;
+let score = 0;
+
+function newQuestion() {
+    const operations = ["+", "-", "×"];
+    const operation = operations[Math.floor(Math.random() * operations.length)];
+
+    let a = Math.floor(Math.random() * 20) + 1;
+    let b = Math.floor(Math.random() * 20) + 1;
+
+    if (operation === "+") {
+        correctAnswer = a + b;
+    }
+
+    if (operation === "-") {
+        // Keep subtraction answers positive
+        if (b > a) {
+            [a, b] = [b, a];
+        }
+
+        correctAnswer = a - b;
+    }
+
+    if (operation === "×") {
+        a = Math.floor(Math.random() * 12) + 1;
+        b = Math.floor(Math.random() * 12) + 1;
+        correctAnswer = a * b;
+    }
+
+    document.getElementById("question").textContent =
+        `${a} ${operation} ${b} = ?`;
+
+    document.getElementById("answer").value = "";
+    document.getElementById("answer").focus();
+}
+
+function checkAnswer() {
+    const input = document.getElementById("answer");
+    const message = document.getElementById("message");
+
+    if (input.value === "") {
+        message.textContent = "Enter an answer first.";
+        return;
+    }
+
+    const userAnswer = Number(input.value);
+
+    if (userAnswer === correctAnswer) {
+        score++;
+        document.getElementById("score").textContent = score;
+
+        message.textContent = "Correct! 🎉";
+
+        setTimeout(newQuestion, 700);
+    } else {
+        message.textContent = "Not quite. Try again!";
+    }
+}
+
+newQuestion();
+</script>
+
+</body>
+</html>
+```
